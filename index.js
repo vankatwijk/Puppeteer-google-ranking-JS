@@ -9,12 +9,22 @@ const url = 'https://www.amazon.de/-/en/Nintendo-Switch-Console-gray/dp/B07W13KJ
 async function configureBrowser() {
 
     const browser = await puppeteer.launch()
-    const page = await puppeteer.newPage();
+    const page = await browser.newPage();
     await page.goto(url);
     return page;
 }
 
-async function checkPrice() {
+async function checkPrice(page) {
 
+    await page.reload();
+    let html = await page.evaluate(() => document.body.innerHTML)
+    console.log(html);
 
 }
+
+async function monitor() {
+    let page = await configureBrowser();
+    await checkPrice(page);
+}
+
+monitor();
