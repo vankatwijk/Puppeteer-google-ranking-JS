@@ -20,7 +20,7 @@ async function gsearch() {
     await delay(Math.random() * 1000);
 
 
-    var array = ['gozolink'];
+    var array = ['bet365'];
     var random = array[Math.floor(Math.random() * array.length)];
     // simple selector for search box
     await page.click('[name=q]');
@@ -28,13 +28,7 @@ async function gsearch() {
     // you forgot this
     await page.keyboard.press('Enter');
     // wait for search results
-    await page.waitForSelector('h3.LC20lb', { timeout: 10000 });
-    await page.evaluate(() => {
-        let elements = document.querySelectorAll('h3.LC20lb')
-            // "for loop" will click all element not random
-        let randomIndex = Math.floor(Math.random() * elements.length) + 1
-        elements[randomIndex].click();
-    })
+
 }
 
 function delay(time) {
