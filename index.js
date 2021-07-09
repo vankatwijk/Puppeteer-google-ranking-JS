@@ -27,11 +27,34 @@ async function gsearch() {
     await page.keyboard.type("" + random);
     // you forgot this
     await page.keyboard.press('Enter');
+
     // wait for search results
+    await page.waitForSelector('h3.LC20lb', { timeout: 10000 });
+    await page.evaluate(() => {
+        let elements = document.querySelectorAll('h3.LC20lb')
+
+        const tmparr = [];
+        for (const element of elements) {
+
+            tmparr.push({
+                'link': element.parentElement.href,
+                'header': element.outerText,
+                'hostname': element.parentElement.hostname,
+                'host': element.parentElement.host,
+            })
+        }
+
+
+        console.log('tmparr', tmparr);
+        //console.log('ddfd', resultobj);
+        //let randomIndex = Math.floor(Math.random() * elements.length) + 1
+        //elements[randomIndex].click();
+    })
 
 }
 
 function delay(time) {
+    console.log('rfrfref');
     return new Promise(function(resolve) {
         setTimeout(resolve, time)
     });
